@@ -1,0 +1,13 @@
+.button {
+  position: absolute;
+  color: black;
+  padding: 0px;
+  width: 35px;
+  height: 30px;
+  top: 0px;
+  left: 824px;
+  border: 0px;
+  text-decoration: none;
+  border-radius: 0px;
+  background-color: white;
+}

@@ -1,0 +1,57 @@
+/* @import 'node_modules/modern-normalize/modern-normalize.css'; */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  list-style-type: none;
+}
+div > .box {
+  display: flex;
+}
+.active {
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  opacity: 1;
+  visibility: visible;
+}
+.inactive {
+  opacity: 0;
+  visibility: hidden;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.userlistContainer {
+  display: flex;
+}
+.userContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-basis: auto;
+}
+.userContainer img {
+  width: 255px;
+  min-height: 255px;
+  margin-bottom: 25px;
+}
+.lastName {
+  text-align: start;
+  letter-spacing: 0.05em;
+}
+.userContainer .lastName::before {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  margin-right: 5px;
+  color: darkblue;
+  word-spacing: 0.25em;
+  content: 'e-mail:';
+}
+.error {
+  color: red;
+}

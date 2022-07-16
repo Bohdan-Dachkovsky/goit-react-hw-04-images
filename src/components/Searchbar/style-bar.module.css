@@ -1,0 +1,50 @@
+.input {
+  border: 1px solid rgb(213, 211, 211);
+  margin-left: 100px;
+  background-color: hsl(0, 0%, 90%);
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+.button {
+  background-color: #bfffc1;
+  border: none;
+  color: white;
+  text-transform: unset;
+  background-color: rgb(60, 60, 87);
+  padding: 13px 26px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button:active {
+  background-color: rgb(25, 49, 70);
+}
+.sentform {
+  box-sizing: border-box;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 1rem;
+}
+.header {
+  background: no-repeat;
+  display: flex;
+  height: auto;
+  min-width: 500px;
+  align-items: center;
+  color: #fff;
+  text-shadow: rgb(104, 104, 150) 0 0 0.2em;
+  margin: 0px 50px;
+  padding: 0px;
+}
