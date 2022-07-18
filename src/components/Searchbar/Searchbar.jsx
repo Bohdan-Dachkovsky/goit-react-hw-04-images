@@ -1,51 +1,46 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 // import PropTypes from 'prop-types';
 import stylebar from './style-bar.module.css'
 
-export default class Searchbar extends Component {
-  state = {
+const Searchbar = () => {
+  const [input, onInput] = useState({
     pool: '',
-  }
+  })
 
-  handleChange = (event) => {
-    this.setState({
+  const handleChange = (event) => {
+    onInput({
       pool: event.currentTarget.value.toLowerCase(),
     })
   }
 
-  handleForm = (event) => {
+  const handleForm = (event) => {
     event.preventDefault()
-
-    if (this.state.pool === '') {
-      alert(`Фото ${this.state.pool} не загрузилися`)
-
+    if (input.pool === '') {
+      alert(`Фото ${input.pool} не загрузилися`)
       return
     }
-    this.props.onSubmit(this.state.pool)
-    // this.setState({ pool: '' })
+    this.props.onSubmit(input.pool)
   }
 
-  render() {
-    const { handleForm, handleChange } = this
-    return (
-      <header className={stylebar.searchbar}>
-        <form onSubmit={handleForm} className={stylebar.form}>
-          <button type="submit" className={stylebar.button}>
-            <span className={stylebar.buttonLabel}>Search</span>
-          </button>
-          <label htmlFor="searchPhoto">
-            <input
-              className={stylebar.input}
-              type="text"
-              name="pool"
-              id="searchPhoto"
-              placeholder="Search images and photos"
-              onChange={handleChange}
-            />
-          </label>
-        </form>
-      </header>
-    )
-  }
+  return (
+    <header className={stylebar.searchbar}>
+      <form onSubmit={handleForm} className={stylebar.form}>
+        <button type="submit" className={stylebar.button}>
+          <span className={stylebar.buttonLabel}>Search</span>
+        </button>
+        <label htmlFor="searchPhoto">
+          <input
+            className={stylebar.input}
+            type="text"
+            name="pool"
+            id="searchPhoto"
+            placeholder="Search images and photos"
+            onChange={handleChange}
+          />
+        </label>
+      </form>
+    </header>
+  )
 }
+export default Searchbar

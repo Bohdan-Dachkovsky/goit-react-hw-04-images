@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { createPortal } from 'react-dom'
 import NativeModal from '../NativeModal/NativeModal.jsx'
 
@@ -13,4 +13,8 @@ export default class Modal extends Component {
       </>
     )
   }
+}
+
+Modal.propTypes = {
+  onActive: PropTypes.func.isRequired,
 }

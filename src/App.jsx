@@ -1,86 +1,99 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
 import Searchbar from './components/Searchbar/Searchbar'
 import WatchProps from './components/Loader/Watch.jsx'
+
 import './index.css'
-// import axios from 'axios'
-export default class App extends Component {
-  state = {
+import axios from 'axios'
+const App = () => {
+  const [state, setState] = useState({
     pool: '',
     modalImages: {},
     showModal: false,
     isLoading: false,
-  }
-  loaderChange = (prevState) => {
-    this.setState({ isLoading: !prevState })
-  }
-  // componentDidMount() {
-  //   const axios = require('axios')
-  //   axios
-  //     .get(
-  //       'https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=pool&page=6&per_page=12&image_type=photo',
-  //     )
-  //     .then(({ data }) => {
-  //       console.log(data)
-  //       this.setState({ photos: data.hits })
-  //     })
-  //     .catch((error) => console.log(error.messages))
-  // }
+    items: [],
+    error: null,
+    page: 6,
+    isLoading: false,
+  })
 
-  // onChangeModal = () => {
-  //   // onActive(this.state.showModal);
-  //   this.setState((prevState) => {
-  //     return { showModal: !prevState }
-  //   })
-  // }
-  onLargeImg = ({ largeImageURL, tags }) => {
-    this.setState({
+  const loaderChange = (prevState) => {
+    setState({ isLoading: !prevState })
+  }
+
+  const largeImg = ({ largeImageURL, tags }) => {
+    setState({
       showModal: true,
       modalImages: { largeImageURL, tags },
     })
   }
-  handlerSubmit = (pool) => {
-    this.setState({ pool })
+  const handlerSubmit = (pool) => {
+    thisetState({ pool })
   }
-  handlerActive = (showModal) => {
-    this.setState({ showModal: !showModal })
+  const handlerActive = () => {
+    setState((showModal) => ({ showModal: !showModal }))
   }
 
-  onToggleModal = () => {
-    // onActive(this.state.showModal);
-    this.setState((prevState) => {
-      return { showModal: !prevState }
+  const onToggleModal = () => {
+    setState((prevState) => ({ showModal: !prevState }))
+  }
+  useEffect(() => {
+    axios
+      .get(
+        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=pool&page=${state.page}&per_page=12&image_type=photo`,
+      )
+      .then(({ data }) => {
+        setState({ items: data.hits })
+      })
+      .catch((error) => console.log(error.messages))
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Escape') {
+        this.onToggleModal()
+      }
     })
-  }
-  // componentDidMount() {
-  //   window.addEventListener('keydown', (e) => {
-  //     if (e.code === 'Escape') {
-  //       this.onToggleModal()
-  //     }
-  //   })
-  // }
+  }, [])
+  useEffect(() => {
+    axios
+      .get(
+        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${state.pool}&page=${state.page}&per_page=12&image_type=photo`,
+      )
+      .then(({ data }) => {
+        setState({ items: data.hits })
+      })
+      .catch((error) => this.setState({ error: error.message }))
+  }, [page, pool])
 
-  render() {
-    const { isLoading } = this.state.isLoading
-    const { showModal } = this.state
-    // onActive={this.onChangeModal.bind(this)}
-    return (
-      <>
-        <Searchbar onSubmit={this.handlerSubmit.bind(this)} />
-        {showModal && <Modal onActive={this.onToggleModal.bind(this)} />}
-        {isLoading ? (
-          <WatchProps />
-        ) : (
-          <ImagineGallery
-            searchName={this.state.pool}
-            onLoader={this.loaderChange.bind(this)}
-            onBox={this.handlerActive.bind(this)}
-            onShow={this.onLargeImg.bind(this)}
-          />
-        )}
-      </>
-    )
+  loadPage = (prevState) => {
+    setState({ page: prevState.page + 1 })
   }
+
+  const { items, showModal, error, isLoading } = state
+
+  return (
+    <>
+      <Searchbar onSubmit={handlerSubmit} />
+      {showModal && <Modal onActive={onToggleModal} />}
+      {isLoading ? (
+        <WatchProps />
+      ) : (
+        <ImagineGallery
+          items={items}
+          error={error}
+          onLoader={loaderChange}
+          onBox={handlerActive}
+          onShow={largeImg}
+        >
+          <button className="btn" onClick={loadPage}>
+            Load More
+          </button>
+        </ImagineGallery>
+      )}
+    </>
+  )
 }
+export default App
