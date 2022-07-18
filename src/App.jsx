@@ -7,6 +7,7 @@ import WatchProps from './components/Loader/Watch.jsx'
 
 import './index.css'
 import axios from 'axios'
+import { construct } from 'core-js/library/fn/reflect'
 const App = () => {
   const [state, setState] = useState({
     pool: '',
@@ -30,7 +31,7 @@ const App = () => {
     })
   }
   const handlerSubmit = (pool) => {
-    thisetState({ pool })
+    setState({ pool })
   }
   const handlerActive = () => {
     setState((showModal) => ({ showModal: !showModal }))
@@ -66,9 +67,9 @@ const App = () => {
         setState({ items: data.hits })
       })
       .catch((error) => this.setState({ error: error.message }))
-  }, [page, pool])
+  }, [state.page, state.pool])
 
-  loadPage = (prevState) => {
+  const loadPage = (prevState) => {
     setState({ page: prevState.page + 1 })
   }
 
