@@ -5,7 +5,7 @@
   "homepage": "https://bohdan-dachkovsky.github.io/goit-react-hw-04-images/",
   "dependencies": {
     "axios": "^0.27.2",
-    "core-js": "^3.23.5",
+    "core-js": "^2.5.7",
     "ctrl-c": "^2.3.2",
     "gh-pages": "^4.0.0",
     "htop": "^1.0.1",
@@ -19,7 +19,7 @@
     "react-loader-spinner": "^5.1.5",
     "react-portal": "^4.2.2",
     "react-script": "^2.0.5",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "^4.0.3",
     "react-toastify": "^9.0.5",
     "reactjs-popup": "^2.0.5",
     "watch-props": "^0.0.3",
