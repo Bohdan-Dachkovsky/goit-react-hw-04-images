@@ -76,7 +76,7 @@ const App = () => {
   const { items, showModal, error, isLoading } = state
 
   return (
-    <>
+    <div>
       <Searchbar onSubmit={handlerSubmit} />
       {showModal && <Modal onActive={onToggleModal} />}
       {isLoading ? (
@@ -94,7 +94,7 @@ const App = () => {
           </button>
         </ImagineGallery>
       )}
-    </>
+    </div>
   )
 }
 export default App
