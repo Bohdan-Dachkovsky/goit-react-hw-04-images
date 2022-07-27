@@ -48,25 +48,18 @@ const App = () => {
         setState({ items: data.hits })
       })
       .catch((error) => console.log(error.messages))
-  })
+  }, [state.page])
 
-  useEffect(() => {
-    window.addEventListener('keydown', (e) => {
-      if (e.code === 'Escape') {
-        this.onToggleModal()
-      }
-    })
-  }, [])
-  useEffect(() => {
-    axios
-      .get(
-        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${state.pool}&page=${state.page}&per_page=12&image_type=photo`,
-      )
-      .then(({ data }) => {
-        setState({ items: data.hits })
-      })
-      .catch((error) => this.setState({ error: error.message }))
-  }, [state.page, state.pool])
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${state.pool}&page=${state.page}&per_page=12&image_type=photo`,
+  //     )
+  //     .then(({ data }) => {
+  //       setState({ items: data.hits })
+  //     })
+  //     .catch((error) => this.setState({ error: error.message }))
+  // }, [state.page, state.pool])
 
   const loadPage = (prevState) => {
     setState((prevState) => ({ page: prevState.page + 1 }))
