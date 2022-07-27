@@ -7,7 +7,7 @@ import WatchProps from './components/Loader/Watch.jsx'
 
 import './index.css'
 import axios from 'axios'
-import { construct } from 'core-js/library/fn/reflect'
+
 const App = () => {
   const [state, setState] = useState({
     pool: '',
@@ -17,11 +17,10 @@ const App = () => {
     items: [],
     error: null,
     page: 6,
-    isLoading: false,
   })
 
-  const loaderChange = (prevState) => {
-    setState({ isLoading: !prevState })
+  const loaderChange = () => {
+    setState((prevState) => ({ isLoading: !prevState.isLoading }))
   }
 
   const largeImg = ({ largeImageURL, tags }) => {
@@ -49,7 +48,7 @@ const App = () => {
         setState({ items: data.hits })
       })
       .catch((error) => console.log(error.messages))
-  }, [])
+  })
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
@@ -70,7 +69,7 @@ const App = () => {
   }, [state.page, state.pool])
 
   const loadPage = (prevState) => {
-    setState({ page: prevState.page + 1 })
+    setState((prevState) => ({ page: prevState.page + 1 }))
   }
 
   const { items, showModal, error, isLoading } = state
