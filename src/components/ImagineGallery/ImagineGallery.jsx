@@ -1,35 +1,33 @@
-import React, { Component } from 'react'
 import css from './gallery.module.css'
 import PropTypes from 'prop-types'
 
 // import { getPosts } from '../../shared/services/post.js';
-export default class ImagineGallery extends Component {
-  render() {
-    const { onShow, items, error } = this.props
-    const photos = items.map(({ id, largeImageURL, webformatURL, tags }) => (
-      <div
-        key={id}
-        onClick={() => onShow({ largeImageURL, tags })}
-        className={css.box}
-      >
-        <ul className={css.list}>
-          <li className={css.el}>
-            <img src={webformatURL} alt={tags} />
-          </li>
-        </ul>
-      </div>
-    ))
-    return (
-      <div className={css.distance}>
-        {error && console.log('Виникла помилка, cпробуйте будь ласка пізніше')}
+const ImagineGallery = ({ onShow, items, error, Children }) => {
+  const photos = items.map(({ id, largeImageURL, webformatURL, tags }) => (
+    <div
+      key={id}
+      onClick={() => onShow({ largeImageURL, tags })}
+      className={css.box}
+    >
+      <ul className={css.list}>
+        <li className={css.el}>
+          <img src={webformatURL} alt={tags} />
+        </li>
+      </ul>
+    </div>
+  ))
+  return (
+    <div className={css.distance}>
+      {error && console.log('Виникла помилка, cпробуйте будь ласка пізніше')}
 
-        <div className={css.container}>{items.length && photos}</div>
-        {this.props.children}
-      </div>
-    )
-  }
+      <div className={css.container}>{Boolean(items.length) && photos}</div>
+      {Children}
+    </div>
+  )
 }
+export default ImagineGallery
 ImagineGallery.defaultProps = {
+  items: [],
   searchName: '',
 }
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import stylebar from './style-bar.module.css'
 
-const Searchbar = () => {
+const Searchbar = (onSubmit) => {
   const [input, onInput] = useState({
     pool: '',
   })
@@ -20,7 +20,7 @@ const Searchbar = () => {
       alert(`Фото ${input.pool} не загрузилися`)
       return
     }
-    this.props.onSubmit(input.pool)
+    onSubmit(input.pool)
   }
 
   return (
@@ -44,3 +44,6 @@ const Searchbar = () => {
   )
 }
 export default Searchbar
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}

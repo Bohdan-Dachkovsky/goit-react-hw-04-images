@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import Button from '../Button/Button.jsx'
 import css from './popup.module.css'
 
-const NativeModal = (button) => {
+const NativeModal = ({ button }) => {
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Escape') {

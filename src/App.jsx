@@ -33,22 +33,22 @@ const App = () => {
     setState({ pool })
   }
   const handlerActive = () => {
-    setState((showModal) => ({ showModal: !showModal }))
+    setState((prevState) => ({ showModal: !prevState.showModal }))
   }
 
   const onToggleModal = () => {
-    setState((prevState) => ({ showModal: !prevState }))
+    setState((prevState) => ({ showModal: !prevState.showModal }))
   }
   useEffect(() => {
     axios
       .get(
-        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=pool&page=${state.page}&per_page=12&image_type=photo`,
+        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${state.pool}&page=${state.page}&per_page=12&image_type=photo`,
       )
       .then(({ data }) => {
         setState({ items: data.hits })
       })
       .catch((error) => console.log(error.messages))
-  }, [state.page])
+  }, [state.page, state.pool])
 
   // useEffect(() => {
   //   axios
@@ -61,7 +61,7 @@ const App = () => {
   //     .catch((error) => this.setState({ error: error.message }))
   // }, [state.page, state.pool])
 
-  const loadPage = (prevState) => {
+  const loadPage = () => {
     setState((prevState) => ({ page: prevState.page + 1 }))
   }
 
