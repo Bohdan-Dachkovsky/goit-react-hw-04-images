@@ -47,16 +47,16 @@ const App = () => {
     setState((prevState) => ({ showModal: !prevState.showModal }))
   }
   useEffect(() => {
-    const { page, pool } = state
+    // const { page, pool } = state
     axios
       .get(
-        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${pool}&page=${page}&per_page=12&image_type=photo`,
+        `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${state.pool}&page=${state.page}&per_page=12&image_type=photo`,
       )
       .then(({ data }) => {
         setState({ items: data.hits })
       })
       .catch((error) => console.log(error.messages))
-  }, [page])
+  }, [state.page, state.pool])
 
   // useEffect(() => {
   //   axios
