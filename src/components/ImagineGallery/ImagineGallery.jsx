@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 
 // import { getPosts } from '../../shared/services/post.js';
 const ImagineGallery = ({ onShow, items, error, Children }) => {
-  const photos = items.map(({ id, largeImageURL, webformatURL, tags }) => (
+  const photos = items.map(({ createdAt, id, image, link }) => (
     <div
       key={id}
-      onClick={() => onShow({ largeImageURL, tags })}
+      onClick={() => onShow({ link, createdAt })}
       className={css.box}
     >
       <ul className={css.list}>
         <li className={css.el}>
-          <img src={webformatURL} alt={tags} />
+          <img src={image} alt={createdAt} />
         </li>
       </ul>
     </div>
@@ -32,14 +32,13 @@ ImagineGallery.defaultProps = {
 }
 
 ImagineGallery.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      largeImageURL: PropTypes.string.isRequired,
-      webformatURL: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-    }),
-  ),
+  items: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    link: PropTypes.string.isRequired,
+  }),
+
   error: PropTypes.string,
   onLoader: PropTypes.func.isRequired,
   onBox: PropTypes.func.isRequired,
