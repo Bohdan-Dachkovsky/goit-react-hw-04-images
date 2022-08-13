@@ -32,12 +32,14 @@ ImagineGallery.defaultProps = {
 }
 
 ImagineGallery.propTypes = {
-  items: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired,
-  }),
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired,
+    }),
+  ),
 
   error: PropTypes.string,
   onLoader: PropTypes.func.isRequired,
