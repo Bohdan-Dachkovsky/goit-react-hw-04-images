@@ -20,7 +20,7 @@ const Searchbar = (onSubmit) => {
       alert(`Фото ${input.pool} не загрузилися`)
       return
     }
-    onSubmit(input.pool)
+    this.props.onSubmit(input.pool)
   }
 
   return (
