@@ -9,7 +9,13 @@ export default class Modal extends Component {
 
     return (
       <>
-        {createPortal(<NativeModal button={this.props.onActive} />, nodeModal)}
+        {createPortal(
+          <NativeModal
+     
+            button={this.props.onActive}
+          />,
+          nodeModal,
+        )}
       </>
     )
   }

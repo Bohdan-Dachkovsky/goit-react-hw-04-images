@@ -78,7 +78,7 @@ const App = () => {
 
   return (
     <div>
-      <Searchbar onSubmit={handlerSubmit} />
+      <Searchbar  onSubmit={handlerSubmit} />
       {showModal && <Modal onActive={onToggleModal} />}
       {isLoading ? (
         <WatchProps />
