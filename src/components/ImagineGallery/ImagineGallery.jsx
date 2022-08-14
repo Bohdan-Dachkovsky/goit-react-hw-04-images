@@ -1,5 +1,6 @@
 import css from './gallery.module.css'
 import PropTypes from 'prop-types'
+import LazyLoad from 'react-lazy-load'
 
 // import { getPosts } from '../../shared/services/post.js';
 const ImagineGallery = ({ onShow, items, error, Children }) => {
@@ -11,7 +12,9 @@ const ImagineGallery = ({ onShow, items, error, Children }) => {
     >
       <ul className={css.list}>
         <li className={css.el}>
-          <img src={image} alt={createdAt} />
+          <LazyLoad height={500} offsetVertical={300}>
+            <img src={image} alt={createdAt} loading="lazy" />
+          </LazyLoad>
         </li>
       </ul>
     </div>
