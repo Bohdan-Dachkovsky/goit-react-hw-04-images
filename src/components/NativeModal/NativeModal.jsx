@@ -6,10 +6,10 @@ const NativeModal = ({ button, onClickPictures }) => {
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Escape') {
-        this.button()
+        button()
       }
     })
-  }, [])
+  }, [button])
   const { createdAt, image } = onClickPictures
   return (
     <div className={css.popup}>

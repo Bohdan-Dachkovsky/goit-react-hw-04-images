@@ -78,8 +78,8 @@ const App = () => {
           items={items}
           error={error}
           onLoader={loaderChange}
-          onBox={handlerActive}
           onShow={largeImg}
+          onActive={handlerActive}
         ></ImagineGallery>
       )}
       {/* onClick={loadPage} */}
