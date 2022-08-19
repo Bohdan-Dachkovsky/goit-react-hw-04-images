@@ -5,12 +5,8 @@ import LazyLoad from 'react-lazy-load'
 // import { getPosts } from '../../shared/services/post.js';
 const ImagineGallery = ({ onShow, items, error, Children }) => {
   const photos = items.map(({ createdAt, id, image, link }) => (
-    <div
-      key={id}
-      onClick={() => onShow({ link, createdAt })}
-      className={css.box}
-    >
-      <ul className={css.list}>
+    <div key={id} className={css.box}>
+      <ul className={css.list} onClick={() => onShow({ image, createdAt })}>
         <li className={css.el}>
           <LazyLoad height={500} offsetVertical={300}>
             <img src={image} alt={createdAt} loading="lazy" />

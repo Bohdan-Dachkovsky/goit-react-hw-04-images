@@ -11,8 +11,8 @@ export default class Modal extends Component {
       <>
         {createPortal(
           <NativeModal
-     
             button={this.props.onActive}
+            onClickPictures={this.props.onClick}
           />,
           nodeModal,
         )}

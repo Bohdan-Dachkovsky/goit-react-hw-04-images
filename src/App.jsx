@@ -16,70 +16,58 @@ const StyleButton = styled.button`
 `
 
 const App = () => {
-  const [state, setState] = useState({
-    pool: '',
-    modalImages: {},
-    showModal: false,
-    isLoading: false,
-    items: [],
-    error: null,
-    page: 6,
-  })
+  // const [poll, setPoll] = useState('')
+  const [modalImage, setModalImage] = useState({})
+  const [showModal, setShowModal] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [items, setItems] = useState([])
+  const [error, setError] = useState(null)
+  // const [page, setPage] = useState(1)
 
   const loaderChange = () => {
-    setState((prevState) => ({ isLoading: !prevState.isLoading }))
+    setIsLoading(!isLoading)
   }
 
   const largeImg = ({ largeImageURL, tags }) => {
-    setState({
-      showModal: true,
-      modalImages: { largeImageURL, tags },
-    })
+    setModalImage(largeImageURL, tags)
+    setShowModal(true)
   }
-  const handlerSubmit = (pool) => {
-    setState({ pool: pool })
-  }
+
+  // const handlerSubmit = (pool) => {
+  //   setPoll(pool);
+  // };
+
   const handlerActive = () => {
-    setState((showModal) => ({ showModal: !showModal }))
+    setShowModal(!showModal)
   }
 
   const onToggleModal = () => {
-    setState((prevState) => ({ showModal: !prevState.showModal }))
+    setShowModal(!showModal)
   }
 
+  // const loadPage = () => {
+  //   setPage((prevState) => prevState + 1);
+  // };
   useEffect(() => {
-    const axiosPhoto = () => {
-      return axios
+    const axiosPhoto = async () => {
+      return await axios
         .get(`https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images`)
         .then(({ data }) => {
-          setState({ items: data })
+          setItems(data)
         })
-        .catch((error) => console.log(error.messages))
+        .catch((error) => {
+          setError(true)
+          console.log(error.message)
+        })
     }
     axiosPhoto()
   }, [])
 
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${state.pool}&page=${state.page}&per_page=12&image_type=photo`,
-  //     )
-  //     .then(({ data }) => {
-  //       setState({ items: data.hits })
-  //     })
-  //     .catch((error) => this.setState({ error: error.message }))
-  // }, [state.page, state.pool])
-
-  const loadPage = () => {
-    setState((prevState) => ({ page: prevState.page + 1 }))
-  }
-
-  const { items, showModal, error, isLoading } = state
-
   return (
     <div>
-      <Searchbar  onSubmit={handlerSubmit} />
-      {showModal && <Modal onActive={onToggleModal} />}
+      <Searchbar />
+      {/* onSubmit={handlerSubmit} */}
+      {showModal && <Modal onActive={onToggleModal} onClick={modalImage} />}
       {isLoading ? (
         <WatchProps />
       ) : (
@@ -91,7 +79,8 @@ const App = () => {
           onShow={largeImg}
         ></ImagineGallery>
       )}
-      <StyleButton onClick={loadPage}>Load More</StyleButton>
+      {/* onClick={loadPage} */}
+      <StyleButton>Load More</StyleButton>
     </div>
   )
 }

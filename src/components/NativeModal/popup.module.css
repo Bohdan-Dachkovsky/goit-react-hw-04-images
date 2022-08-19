@@ -17,8 +17,10 @@
   justify-content: center;
   align-items: center;
 }
-img {
+.formBody img {
   display: block;
+  width: 400px;
+  height: 400px;
 }
 .formBody {
   background-color: white;

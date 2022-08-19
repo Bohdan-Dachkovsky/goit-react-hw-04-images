@@ -15,9 +15,9 @@ ul {
   border: 2px solid darkblue;
   margin: 50px;
 }
-/* .container:nth-child(5n) {
+.box:nth-child(5n) {
   padding-right: 0px;
-} */
+}
 .box {
   width: auto;
   height: auto;
