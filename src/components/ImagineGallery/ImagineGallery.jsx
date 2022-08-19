@@ -4,7 +4,7 @@ import LazyLoad from 'react-lazy-load'
 
 // import { getPosts } from '../../shared/services/post.js';
 const ImagineGallery = ({ onShow, items, error, Children }) => {
-  const photos = items.map(({ createdAt, id, image, link }) => (
+  const photos = items.map(({ createdAt, id, image }) => (
     <div key={id} className={css.box}>
       <ul className={css.list} onClick={() => onShow({ image, createdAt })}>
         <li className={css.el}>
@@ -36,7 +36,6 @@ ImagineGallery.propTypes = {
       id: PropTypes.string.isRequired,
       createdAt: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
     }),
   ),
 

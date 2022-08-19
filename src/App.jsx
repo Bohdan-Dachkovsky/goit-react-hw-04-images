@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
 import Searchbar from './components/Searchbar/Searchbar'
 import WatchProps from './components/Loader/Watch.jsx'
-
 import './index.css'
 import axios from 'axios'
+
 const StyleButton = styled.button`
   background-color: rgba(60, 60, 87, 0.9);
   color: white;
@@ -17,19 +17,22 @@ const StyleButton = styled.button`
 
 const App = () => {
   // const [poll, setPoll] = useState('')
+  // const [page, setPage] = useState(1)
   const [modalImage, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
-  // const [page, setPage] = useState(1)
 
   const loaderChange = () => {
     setIsLoading(!isLoading)
   }
 
-  const largeImg = ({ largeImageURL, tags }) => {
-    setModalImage(largeImageURL, tags)
+  const largeImg = ({ image, createdAt }) => {
+    setModalImage({
+      image,
+      createdAt,
+    })
     setShowModal(true)
   }
 
@@ -49,8 +52,8 @@ const App = () => {
   //   setPage((prevState) => prevState + 1);
   // };
   useEffect(() => {
-    const axiosPhoto = async () => {
-      return await axios
+    const axiosPhoto = () => {
+      return axios
         .get(`https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images`)
         .then(({ data }) => {
           setItems(data)
