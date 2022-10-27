@@ -16,8 +16,6 @@ const StyleButton = styled.button`
 `
 
 const App = () => {
-  // const [poll, setPoll] = useState('')
-  // const [page, setPage] = useState(1)
   const [modalImage, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
