@@ -2,7 +2,7 @@ import css from './gallery.module.css'
 import PropTypes from 'prop-types'
 import LazyLoad from 'react-lazy-load'
 
-// import { getPosts } from '../../shared/services/post.js';
+//	import { getPosts } from '../../shared/services/post.js';
 const ImagineGallery = ({ onShow, items, error, Children }) => {
   const photos = items.map(({ createdAt, id, image }) => (
     <div key={id} className={css.box}>
