@@ -20,7 +20,7 @@ const Searchbar = (onSubmit) => {
       alert(`Фото ${input.pool} не загрузилися`)
       return
     }
-    onSubmit(input.pool)
+    this.props.onSubmit(input.pool)
   }
 
   return (
@@ -45,5 +45,5 @@ const Searchbar = (onSubmit) => {
 }
 export default Searchbar
 Searchbar.propTypes = {
-  onSubmit: PropTypes.func,
+  onSubmit: PropTypes.func.isRequired,
 }

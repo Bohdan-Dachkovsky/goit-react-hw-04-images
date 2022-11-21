@@ -37,7 +37,6 @@ const App = () => {
 
   const handlerSubmit = (pool) => {
     setName(pool)
-    alert('Більше' + { name } + 'фото не знайдено!')
   }
 
   const handlerActive = () => {
@@ -51,7 +50,9 @@ const App = () => {
   // const loadPage = () => {
   //   setPage((prevState) => prevState + 1);
   // };
+  console.log(name)
   useEffect(() => {
+    alert('Більше фото' + { name } + 'не завантажилося')
     const axiosPhoto = () => {
       return axios
         .get(
@@ -66,12 +67,12 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [])
+  }, [name])
 
   return (
     <div>
-      <Searchbar />
-      onSubmit={handlerSubmit}
+      <Searchbar onSubmit={handlerSubmit} />
+
       {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (
         <WatchProps />
