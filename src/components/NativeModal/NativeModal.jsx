@@ -10,7 +10,7 @@ const NativeModal = ({ button, onClickPictures }) => {
       }
     })
   }, [button])
-  const { createdAt, image } = onClickPictures
+  const { createdAt, image } = this.props.onClickPictures
   return (
     <div className={css.popup}>
       <div className={css.overlay}>

@@ -16,7 +16,7 @@ const StyleButton = styled.button`
 `
 
 const App = () => {
-  const [modalImage, setModalImage] = useState({})
+  const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
@@ -68,7 +68,7 @@ const App = () => {
     <div>
       <Searchbar />
       {/* onSubmit={handlerSubmit} */}
-      {showModal && <Modal onActive={onToggleModal} onClick={modalImage} />}
+      {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (
         <WatchProps />
       ) : (

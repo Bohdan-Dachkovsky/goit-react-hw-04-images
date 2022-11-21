@@ -41,6 +41,6 @@ ImagineGallery.propTypes = {
 
   error: PropTypes.string,
   onLoader: PropTypes.func.isRequired,
-  onBox: PropTypes.func.isRequired,
-  onShow: PropTypes.func.isRequired,
+  onBox: PropTypes.func,
+  onShow: PropTypes.func,
 }
