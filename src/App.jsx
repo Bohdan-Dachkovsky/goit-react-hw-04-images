@@ -16,7 +16,7 @@ const StyleButton = styled.button`
 `
 
 const App = () => {
-  // const [name, setName] = useState('')
+  const [name, setName] = useState('')
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -35,9 +35,10 @@ const App = () => {
     setShowModal(true)
   }
 
-  // const handlerSubmit = (pool) => {
-  //   setName(pool)
-  // }
+  const handlerSubmit = (pool) => {
+    setName(pool)
+    alert('Більше' + { name } + 'фото не знайдено!')
+  }
 
   const handlerActive = () => {
     setShowModal(!showModal)
@@ -70,7 +71,7 @@ const App = () => {
   return (
     <div>
       <Searchbar />
-      {/* onSubmit={handlerSubmit} */}
+      onSubmit={handlerSubmit}
       {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (
         <WatchProps />
