@@ -16,6 +16,7 @@ const StyleButton = styled.button`
 `
 
 const App = () => {
+  // const [name, setName] = useState('')
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -35,8 +36,8 @@ const App = () => {
   }
 
   // const handlerSubmit = (pool) => {
-  //   setPoll(pool);
-  // };
+  //   setName(pool)
+  // }
 
   const handlerActive = () => {
     setShowModal(!showModal)
@@ -52,7 +53,9 @@ const App = () => {
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
-        .get(`https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images`)
+        .get(
+          `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1`,
+        )
         .then(({ data }) => {
           setItems(data)
         })
