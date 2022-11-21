@@ -16,7 +16,7 @@ const StyleButton = styled.button`
 `
 
 const App = () => {
-  const [name, setName] = useState('')
+  // const [name, setName] = useState([])
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -35,9 +35,10 @@ const App = () => {
     setShowModal(true)
   }
 
-  const handlerSubmit = (pool) => {
-    setName(pool)
-  }
+  // const handlerSubmit = (pool) => {
+  //   setName(pool)
+  //   console.log(name)
+  // }
 
   const handlerActive = () => {
     setShowModal(!showModal)
@@ -50,9 +51,8 @@ const App = () => {
   // const loadPage = () => {
   //   setPage((prevState) => prevState + 1);
   // };
-  console.log(name)
+
   useEffect(() => {
-    alert('Більше фото' + { name } + 'не завантажилося')
     const axiosPhoto = () => {
       return axios
         .get(
@@ -67,11 +67,11 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [name])
+  }, [])
 
   return (
     <div>
-      <Searchbar onSubmit={handlerSubmit} />
+      <Searchbar />
 
       {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (
