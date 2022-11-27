@@ -1,19 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
-import styled from 'styled-components'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
 import Searchbar from './components/Searchbar/Searchbar'
 import WatchProps from './components/Loader/Watch.jsx'
+import LoaderButton from './LoaderButton/LoaderButton.jsx'
 import './index.css'
 import axios from 'axios'
 
-const StyleButton = styled.button`
-  background-color: rgba(60, 60, 87, 0.9);
-  color: white;
-  width: 50px;
-  margin-left: 50px;
-`
 function usePrevious(value) {
   const ref = useRef()
   useEffect(() => {
@@ -29,7 +23,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
-
+  const [page, setPage] = useState(10)
   const loaderChange = () => {
     setIsLoading(!isLoading)
   }
@@ -55,18 +49,18 @@ const App = () => {
     setShowModal(!showModal)
   }
 
-  // const loadPage = () => {
-  //   setPage((prevState) => prevState + 1);
-  // };
-  const prevCount = usePrevious(items)
+  const loadPage = () => {
+    setPage(() => ({ page: page + 10 }))
+  }
+  const prevData = usePrevious(items)
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
         .get(
-          `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1&limit=10`,
+          `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1&limit=${page}`,
         )
         .then(({ data }) => {
-          setItems([...prevCount, ...data])
+          setItems([...prevData, ...data])
         })
         .catch((error) => {
           setError(true)
@@ -74,7 +68,7 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [prevCount])
+  }, [prevData, page])
 
   return (
     <div>
@@ -92,8 +86,8 @@ const App = () => {
           onActive={handlerActive}
         ></ImagineGallery>
       )}
-      {/* onClick={loadPage} */}
-      <StyleButton>Load More</StyleButton>
+
+      <LoaderButton onClick={loadPage} />
     </div>
   )
 }
