@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import styled from 'styled-components'
@@ -14,6 +14,13 @@ const StyleButton = styled.button`
   width: 50px;
   margin-left: 50px;
 `
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  return ref.current
+}
 
 const App = () => {
   // const [name, setName] = useState([])
@@ -51,15 +58,15 @@ const App = () => {
   // const loadPage = () => {
   //   setPage((prevState) => prevState + 1);
   // };
-
+  const prevCount = usePrevious(items)
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
         .get(
-          `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1&limit=8`,
+          `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1&limit=10`,
         )
         .then(({ data }) => {
-          setItems(data)
+          setItems([...prevCount, ...data])
         })
         .catch((error) => {
           setError(true)
@@ -67,7 +74,7 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [])
+  }, [prevCount])
 
   return (
     <div>
