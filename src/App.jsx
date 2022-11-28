@@ -9,21 +9,22 @@ import './index.css'
 import axios from 'axios'
 
 const App = () => {
+  const ACCESS_KEY = 'Cj2GfrQNcbgsABdxizXkH9ojeNmYsZEpqsvVkWav3uY'
   // const [name, setName] = useState([])
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
-  const [page, setPage] = useState(10)
+  const [page, setPage] = useState(1)
   const loaderChange = () => {
     setIsLoading(!isLoading)
   }
 
-  const largeImg = ({ image, createdAt }) => {
+  const largeImg = ({ links, published_at }) => {
     setModalImage({
-      image,
-      createdAt,
+      links,
+      published_at,
     })
     setShowModal(true)
   }
@@ -42,17 +43,18 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage((prevState) => ({ page: prevState.page + 10 }))
+    setPage((prevState) => ({ page: prevState.page + 1 }))
   }
 
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
         .get(
-          `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1&limit=${page}`,
+          `https://api.unsplash.com/search/collections?client_id=${ACCESS_KEY}&page=${page}&query=library&language=en`,
         )
         .then(({ data }) => {
-          setItems((prevState) => [...prevState.items, ...data])
+          setItems((prevState) => [...prevState, ...data.results])
+          console.log(data.results)
         })
         .catch((error) => {
           setError(true)
