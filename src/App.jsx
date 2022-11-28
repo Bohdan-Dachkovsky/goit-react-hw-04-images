@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
@@ -7,14 +7,6 @@ import WatchProps from './components/Loader/Watch.jsx'
 import LoaderButton from './LoaderButton/LoaderButton.jsx'
 import './index.css'
 import axios from 'axios'
-
-function usePrevious(value) {
-  const ref = useRef()
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-  return ref.current
-}
 
 const App = () => {
   // const [name, setName] = useState([])
@@ -50,9 +42,9 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage(() => ({ page: page + 10 }))
+    setPage((prevState) => ({ page: prevState.page + 10 }))
   }
-  const prevData = usePrevious(items)
+
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
@@ -60,7 +52,7 @@ const App = () => {
           `https://62f7984e73b79d01535aee13.mockapi.io/api/u1/fake-images?page=1&limit=${page}`,
         )
         .then(({ data }) => {
-          setItems([...prevData, ...data])
+          setItems((prevState) => [...prevState.items, ...data])
         })
         .catch((error) => {
           setError(true)
@@ -68,7 +60,7 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [prevData, page])
+  }, [page])
 
   return (
     <div>
