@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
@@ -8,38 +8,30 @@ import LoaderButton from './LoaderButton/LoaderButton.jsx'
 import './index.css'
 import axios from 'axios'
 
-function usePrevious(value) {
-  const ref = useRef()
-  useEffect(() => {
-    ref.current = value
-  }, [value])
-  return ref.current
-}
-
 const App = () => {
-  // const [name, setName] = useState([])
+  const [name, setName] = useState([])
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState({ page: 1 })
   const loaderChange = () => {
     setIsLoading(!isLoading)
   }
 
-  const largeImg = ({ links, published_at }) => {
+  const largeImg = ({ images, createdAt }) => {
     setModalImage({
-      links,
-      published_at,
+      images,
+      createdAt,
     })
     setShowModal(true)
   }
 
-  // const handlerSubmit = (pool) => {
-  //   setName(pool)
-  //   console.log(name)
-  // }
+  const handlerSubmit = (pool) => {
+    setName(pool)
+    console.log(name)
+  }
 
   const handlerActive = () => {
     setShowModal(!showModal)
@@ -50,14 +42,14 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage((prevState) => ({ page: prevState.page + 10 }))
+    setPage((prevState) => ({ page: prevState.page + 1 }))
   }
-  const prevData = usePrevious(items)
+
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
         .get(
-          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${pool}&page=${page}&per_page=12&image_type=photo`,
+          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${name}&page=${page}&per_page=12&image_type=photo`,
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState.items, ...data.hits])
@@ -68,11 +60,11 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [prevData, page])
+  }, [name, page])
 
   return (
     <div>
-      <Searchbar />
+      <Searchbar onSubmit={handlerSubmit} />
 
       {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (
