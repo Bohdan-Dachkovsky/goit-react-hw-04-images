@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
@@ -8,8 +8,15 @@ import LoaderButton from './LoaderButton/LoaderButton.jsx'
 import './index.css'
 import axios from 'axios'
 
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+  return ref.current
+}
+
 const App = () => {
-  const ACCESS_KEY = 'Cj2GfrQNcbgsABdxizXkH9ojeNmYsZEpqsvVkWav3uY'
   // const [name, setName] = useState([])
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
@@ -43,18 +50,17 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage((prevState) => ({ page: prevState.page + 1 }))
+    setPage((prevState) => ({ page: prevState.page + 10 }))
   }
-
+  const prevData = usePrevious(items)
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
         .get(
-          `https://api.unsplash.com/search/collections?client_id=${ACCESS_KEY}&page=${page}&query=library&language=en`,
+          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${pool}&page=${page}&per_page=12&image_type=photo`,
         )
         .then(({ data }) => {
-          setItems((prevState) => [...prevState, ...data.results])
-          console.log(data.results)
+          setItems((prevState) => [...prevState.items, ...data.hits])
         })
         .catch((error) => {
           setError(true)
@@ -62,7 +68,7 @@ const App = () => {
         })
     }
     axiosPhoto()
-  }, [page])
+  }, [prevData, page])
 
   return (
     <div>

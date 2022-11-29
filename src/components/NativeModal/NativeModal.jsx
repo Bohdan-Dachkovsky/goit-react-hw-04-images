@@ -5,7 +5,7 @@ import css from './popup.module.css'
 const NativeModal = ({ button, onClickPictures }) => {
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
-      if (e.code === 'Escape') {
+      if (e.code === 'CapsLock') {
         button()
       }
     })
