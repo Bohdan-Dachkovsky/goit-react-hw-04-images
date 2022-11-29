@@ -52,7 +52,7 @@ const App = () => {
           `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${name}&page=${page}&per_page=12&image_type=photo`,
         )
         .then(({ data }) => {
-          setItems((prevState) => [...prevState.items, ...data.hits])
+          setItems((prevState) => [...prevState, ...data.hits])
         })
         .catch((error) => {
           setError(true)
