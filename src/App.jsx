@@ -52,7 +52,6 @@ const App = () => {
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState, ...data.hits])
-          console.log(data)
         })
         .catch((error) => {
           setError(true)
