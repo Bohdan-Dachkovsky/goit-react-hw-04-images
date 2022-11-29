@@ -27,7 +27,6 @@ const App = () => {
     })
     setShowModal(true)
   }
-
   const handlerSubmit = (search) => {
     setName(search)
   }
