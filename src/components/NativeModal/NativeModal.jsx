@@ -5,7 +5,7 @@ import css from './popup.module.css'
 const NativeModal = ({ button, onClickPictures }) => {
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
-      if (e.code === 'CapsLock') {
+      if (e.code === 'Escape') {
         button()
       }
     })
@@ -20,7 +20,7 @@ const NativeModal = ({ button, onClickPictures }) => {
           </Button>
           <img src={webformatURL} alt={user} loading="eager" />
           <p>
-            <i>Created in {user}</i>
+            <i>Name photo is {user}</i>
           </p>
         </div>
       </div>

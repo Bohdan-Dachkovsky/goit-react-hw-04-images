@@ -5,22 +5,22 @@ import stylebar from './style-bar.module.css'
 
 const Searchbar = (onSubmit) => {
   const [input, onInput] = useState({
-    pool: '',
+    search: '',
   })
 
   const handleChange = (event) => {
     onInput({
-      pool: event.currentTarget.value.toLowerCase(),
+      search: event.currentTarget.value.toLowerCase(),
     })
   }
 
   const handleForm = (event) => {
     event.preventDefault()
-    if (input.pool === '') {
-      alert(`Фото ${input.pool} не загрузилися`)
+    if (input.search === '') {
+      alert(`Фото ${input.search} не загрузилися`)
       return
     }
-    onSubmit(input.pool)
+    onSubmit(input.search)
   }
 
   return (
@@ -33,7 +33,7 @@ const Searchbar = (onSubmit) => {
           <input
             className={stylebar.input}
             type="text"
-            name="pool"
+            name="search"
             id="searchPhoto"
             placeholder="Search images and photos"
             onChange={handleChange}

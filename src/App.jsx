@@ -9,13 +9,13 @@ import './index.css'
 import axios from 'axios'
 
 const App = () => {
-  const [name, setName] = useState([])
+  const [name, setName] = useState('')
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
-  const [page, setPage] = useState({ page: 1 })
+  const [page, setPage] = useState(1)
   const loaderChange = () => {
     setIsLoading(!isLoading)
   }
@@ -28,9 +28,8 @@ const App = () => {
     setShowModal(true)
   }
 
-  const handlerSubmit = (pool) => {
-    setName(pool)
-    console.log(name)
+  const handlerSubmit = (search) => {
+    setName(search)
   }
 
   const handlerActive = () => {
@@ -42,17 +41,18 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage((prevState) => ({ page: prevState.page + 1 }))
+    setPage((prevState) => prevState + 1)
   }
 
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
         .get(
-          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${name}&page=${page}&per_page=12&image_type=photo`,
+          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${name}&page=${page}&per_page=15&image_type=photo`,
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState, ...data.hits])
+          console.log(data)
         })
         .catch((error) => {
           setError(true)
