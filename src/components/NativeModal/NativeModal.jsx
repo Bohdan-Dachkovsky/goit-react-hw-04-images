@@ -10,7 +10,7 @@ const NativeModal = ({ button, onClickPictures }) => {
       }
     })
   }, [button])
-  const { image, createdAt } = onClickPictures
+  const { user, webformatURL } = onClickPictures
   return (
     <div className={css.popup}>
       <div className={css.overlay}>
@@ -18,9 +18,9 @@ const NativeModal = ({ button, onClickPictures }) => {
           <Button clasName={css.close} onClick={button}>
             x
           </Button>
-          <img src={image} alt={createdAt} loading="eager" />
+          <img src={webformatURL} alt={user} loading="eager" />
           <p>
-            <i>Created in {createdAt}</i>
+            <i>Created in {user}</i>
           </p>
         </div>
       </div>

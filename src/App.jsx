@@ -20,10 +20,10 @@ const App = () => {
     setIsLoading(!isLoading)
   }
 
-  const largeImg = ({ image, createdAt }) => {
+  const largeImg = ({ user, webformatURL }) => {
     setModalImage({
-      image,
-      createdAt,
+      user,
+      webformatURL,
     })
     setShowModal(true)
   }
@@ -53,7 +53,6 @@ const App = () => {
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState, ...data.hits])
-          console.log(data)
         })
         .catch((error) => {
           setError(true)

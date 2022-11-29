@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 //	import { getPosts } from '../../shared/services/post.js';
 const ImagineGallery = ({ onShow, items, error, Children }) => {
-  const photos = items.map(({ id, image, createdAt }) => (
+  const photos = items.map(({ id, user, largeImageURL, webformatURL }) => (
     <div key={id} className={css.box}>
-      <ul className={css.list} onClick={() => onShow({ image, createdAt })}>
+      <ul className={css.list} onClick={() => onShow({ user, webformatURL })}>
         <li className={css.el}>
-          <img src={image} alt={createdAt} loading="lazy" />
+          <img src={largeImageURL} alt={user} loading="lazy" />
         </li>
       </ul>
     </div>
@@ -31,8 +31,9 @@ ImagineGallery.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      images: PropTypes.string.isRequired,
-      createdAt: PropTypes.string.isRequired,
+      user: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      webformatURL: PropTypes.string.isRequired,
     }),
   ),
 
