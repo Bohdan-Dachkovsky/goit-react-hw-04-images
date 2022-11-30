@@ -9,7 +9,7 @@ import './index.css'
 import axios from 'axios'
 
 const App = () => {
-  const [name, setName] = useState('')
+  const [name, setName] = useState({})
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -30,7 +30,7 @@ const App = () => {
   const handlerSubmit = (search) => {
     setName(search)
   }
-
+  console.log(name)
   const handlerActive = () => {
     setShowModal(!showModal)
   }
@@ -40,7 +40,7 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage((prevState) => prevState + 1)
+    setPage((prevState) => prevState.page + 1)
   }
 
   useEffect(() => {

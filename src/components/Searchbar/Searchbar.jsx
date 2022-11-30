@@ -21,6 +21,7 @@ const Searchbar = (onSubmit) => {
       return
     }
     onSubmit(input.search)
+    onInput('')
   }
 
   return (
