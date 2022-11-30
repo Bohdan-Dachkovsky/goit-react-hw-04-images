@@ -27,10 +27,7 @@ const App = () => {
     })
     setShowModal(true)
   }
-  const handlerSubmit = (search) => {
-    setSearchName(search)
-  }
-  console.log(name)
+
   const handlerActive = () => {
     setShowModal(!showModal)
   }
@@ -62,7 +59,7 @@ const App = () => {
 
   return (
     <div>
-      <Searchbar onSubmit={handlerSubmit} />
+      <Searchbar onSubmit={setSearchName} />
 
       {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (

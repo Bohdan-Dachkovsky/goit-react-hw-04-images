@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import stylebar from './style-bar.module.css'
 
-const Searchbar = (onSubmit) => {
+const Searchbar = ({ onSubmit }) => {
   const [input, onInput] = useState({ search: '' })
 
   const handleChange = (event) => {
