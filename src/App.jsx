@@ -9,7 +9,7 @@ import './index.css'
 import axios from 'axios'
 
 const App = () => {
-  const [name, setName] = useState({})
+  const [name, setName] = useState('')
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)

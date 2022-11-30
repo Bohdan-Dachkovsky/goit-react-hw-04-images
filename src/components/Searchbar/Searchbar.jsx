@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import stylebar from './style-bar.module.css'
 
 const Searchbar = (onSubmit) => {
-  const [input, onInput] = useState({
-    search: '',
-  })
+  const [input, onInput] = useState({ search: '' })
 
   const handleChange = (event) => {
     onInput({
@@ -46,5 +44,5 @@ const Searchbar = (onSubmit) => {
 }
 export default Searchbar
 Searchbar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func,
 }
