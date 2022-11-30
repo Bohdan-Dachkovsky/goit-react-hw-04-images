@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import button from './btn.module.css'
-const LoaderButton = ({ loadPage }) => {
+const LoaderButton = ({ onClick }) => {
   return (
-    <button className={button.style} onClick={() => loadPage()}>
+    <button className={button.style} onClick={() => onClick()}>
       Load More
     </button>
   )

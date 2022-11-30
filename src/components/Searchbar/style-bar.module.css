@@ -1,4 +1,6 @@
 .input {
+  width: 700px;
+  height: 45px;
   border: 1px solid rgb(213, 211, 211);
   margin-left: 100px;
   background-color: hsl(0, 0%, 90%);
@@ -13,6 +15,9 @@ textarea {
   font-size: 100%;
 }
 .button {
+  position: relative;
+  top: 0px;
+  left: 50px;
   background-color: #bfffc1;
   border: none;
   color: white;

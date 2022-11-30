@@ -37,9 +37,9 @@ const App = () => {
   }
 
   const loadPage = () => {
-    setPage((prevState) => prevState.page + 1)
+    setPage((prevState) => prevState + 1)
   }
-
+  console.log(name)
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
