@@ -46,7 +46,6 @@ const App = () => {
       return axios
         .get(
           `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${name}&page=${page}&per_page=15&image_type=photo`,
-          { params: { q: 'sea' } },
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState, ...data.hits])
@@ -60,7 +59,23 @@ const App = () => {
       axiosPhoto()
     }
   }, [name, page])
+  useEffect(() => {
+    const axiosPhoto = () => {
+      return axios
+        .get(
+          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q='sea'&page=1&per_page=15&image_type=photo`,
+        )
+        .then(({ data }) => {
+          setItems((prevState) => [...prevState, ...data.hits])
+        })
+        .catch((error) => {
+          setError(true)
+          console.log(error.message)
+        })
+    }
 
+    axiosPhoto()
+  }, [])
   return (
     <div>
       <Searchbar onSubmit={setSearchName} />
