@@ -46,6 +46,7 @@ const App = () => {
       return axios
         .get(
           `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q=${name}&page=${page}&per_page=15&image_type=photo`,
+          { params: { q: 'sea' } },
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState, ...data.hits])
