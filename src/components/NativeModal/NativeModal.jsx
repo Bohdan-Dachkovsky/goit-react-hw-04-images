@@ -9,6 +9,11 @@ const NativeModal = ({ button, onClickPictures }) => {
         button()
       }
     })
+    window.removeEventListener('keydown', (e) => {
+      if (e.code === 'Escape') {
+        button()
+      }
+    })
   }, [button])
   const { user, webformatURL } = onClickPictures
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
@@ -40,6 +40,7 @@ const App = () => {
     setPage((prevState) => prevState + 1)
   }
   console.log(name)
+  const previousRef = useRef(name)
   useEffect(() => {
     const axiosPhoto = () => {
       return axios
@@ -54,7 +55,9 @@ const App = () => {
           console.log(error.message)
         })
     }
-    axiosPhoto()
+    if (previousRef.current !== name) {
+      axiosPhoto()
+    }
   }, [name, page])
 
   return (
