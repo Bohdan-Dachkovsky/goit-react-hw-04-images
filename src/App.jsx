@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { v4 as uuidv4 } from 'uuid';
 import Modal from './components/Modal/Modal'
 import ImagineGallery from './components/ImagineGallery/ImagineGallery.jsx'
@@ -13,6 +13,7 @@ const App = () => {
   const [modalImages, setModalImage] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [onShow, SetOnShow] = useState(false)
   const [items, setItems] = useState([])
   const [error, setError] = useState(null)
   const [page, setPage] = useState(1)
@@ -27,7 +28,11 @@ const App = () => {
     })
     setShowModal(true)
   }
-
+  const submitSearch = (search) => {
+    setSearchName(search)
+    setPage(1)
+    setItems([])
+  }
   const handlerActive = () => {
     setShowModal(!showModal)
   }
@@ -40,8 +45,9 @@ const App = () => {
     setPage((prevState) => prevState + 1)
   }
   console.log(name)
-  const previousRef = useRef(name)
+
   useEffect(() => {
+    SetOnShow(false)
     const axiosPhoto = () => {
       return axios
         .get(
@@ -49,48 +55,35 @@ const App = () => {
         )
         .then(({ data }) => {
           setItems((prevState) => [...prevState, ...data.hits])
+          SetOnShow(true)
         })
         .catch((error) => {
           setError(true)
           console.log(error.message)
         })
     }
-    if (previousRef.current !== name) {
+    if (name.length > 0) {
       axiosPhoto()
     }
   }, [name, page])
-  useEffect(() => {
-    const axiosPhoto = () => {
-      return axios
-        .get(
-          `https://pixabay.com/api/?key=26335917-be25fd704b1936d7f202ea389&q='sea'&page=1&per_page=15&image_type=photo`,
-        )
-        .then(({ data }) => {
-          setItems((prevState) => [...prevState, ...data.hits])
-        })
-        .catch((error) => {
-          setError(true)
-          console.log(error.message)
-        })
-    }
 
-    axiosPhoto()
-  }, [])
   return (
     <div>
-      <Searchbar onSubmit={setSearchName} />
+      <Searchbar onSubmit={submitSearch} />
 
       {showModal && <Modal onActive={onToggleModal} onClick={modalImages} />}
       {isLoading ? (
         <WatchProps />
       ) : (
-        <ImagineGallery
-          items={items}
-          error={error}
-          onLoader={loaderChange}
-          onShow={largeImg}
-          onActive={handlerActive}
-        ></ImagineGallery>
+        onShow && (
+          <ImagineGallery
+            items={items}
+            error={error}
+            onLoader={loaderChange}
+            onShow={largeImg}
+            onActive={handlerActive}
+          ></ImagineGallery>
+        )
       )}
 
       <LoaderButton onClick={loadPage} />
